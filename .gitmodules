@@ -1,0 +1,9 @@
+[submodule "external/openssl"]
+	path = external/openssl
+	url = https://android.googlesource.com/platform/external/openssl
+[submodule "external/safe-iop"]
+	path = external/safe-iop
+	url = https://android.googlesource.com/platform/external/safe-iop
+[submodule "external/fdlibm"]
+	path = external/fdlibm
+	url = https://android.googlesource.com/platform/external/fdlibm

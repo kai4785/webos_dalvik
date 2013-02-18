@@ -1,13 +1,17 @@
 macro(android_add_subdirectory dir)
-    if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt)
-        file(COPY ${CMAKE_SOURCE_DIR}/android_cmake_files/${dir}.cmake
-            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${dir}
-            )
-        file(RENAME ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/${dir}.cmake
-            ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt
-        )
-    endif()
+    file(COPY ${CMAKE_SOURCE_DIR}/android_cmake_files/${dir}.cmake
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${dir}
+    )
+    file(RENAME ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/${dir}.cmake
+        ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt
+    )
     add_subdirectory(${dir})
+endmacro()
+macro(android_include file)
+    file(COPY ${CMAKE_SOURCE_DIR}/android_cmake_files/${file}
+        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+    include(${file})
 endmacro()
 
 macro(concat var)
