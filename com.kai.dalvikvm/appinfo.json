@@ -1,0 +1,10 @@
+{
+	"id": "com.kai.dalvikvm",
+	"version": "1.0.0",
+	"vendor": "Kai Meyer",
+	"type": "pdk",
+	"main": "dalvikvm",
+	"title": "webOS Dalvik",
+	"icon": "icon.png",
+	"requiredMemory": 32
+}
