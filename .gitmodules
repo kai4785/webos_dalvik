@@ -16,3 +16,6 @@
 [submodule "external/zlib"]
 	path = external/zlib
 	url = https://android.googlesource.com/platform/external/zlib
+[submodule "system/core"]
+	path = system/core
+	url = https://android.googlesource.com/platform/system/core

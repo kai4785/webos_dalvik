@@ -17,4 +17,4 @@ android_add_subdirectory(icu4c)
 # SSL_set_cipher_lists
 # SSL_set_session_creation_enabled
 # SSL_use_certificate_chain
-# android_add_subdirectory(openssl)
+android_add_subdirectory(openssl)

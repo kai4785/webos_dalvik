@@ -1,16 +1,30 @@
 macro(android_add_subdirectory dir)
-    file(COPY ${CMAKE_SOURCE_DIR}/android_cmake_files/${dir}.cmake
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${dir}
-    )
-    file(RENAME ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/${dir}.cmake
-        ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt
-    )
+    if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt)
+        file(COPY ${CMAKE_SOURCE_DIR}/android_cmake_files/${dir}.cmake
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/${dir}
+        )
+        file(RENAME ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/${dir}.cmake
+            ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt
+        )
+    else()
+        add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt
+            DEPENDS ${CMAKE_SOURCE_DIR}/android_cmake_files/${dir}.cmake
+            COMMAND cp -u ${CMAKE_SOURCE_DIR}/android_cmake_files/${dir}.cmake ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt
+        )
+    endif()
     add_subdirectory(${dir})
 endmacro()
 macro(android_include file)
-    file(COPY ${CMAKE_SOURCE_DIR}/android_cmake_files/${file}
-        DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}
-    )
+    if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${file})
+        file(COPY ${CMAKE_SOURCE_DIR}/android_cmake_files/${file}
+            DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}
+        )
+    else()
+        add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${file}
+            DEPENDS ${CMAKE_SOURCE_DIR}/android_cmake_files/${file}
+            COMMAND cp -u ${CMAKE_SOURCE_DIR}/android_cmake_files/${file} ${CMAKE_CURRENT_SOURCE_DIR}/${file}
+        )
+    endif()
     include(${file})
 endmacro()
 
