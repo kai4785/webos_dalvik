@@ -7,3 +7,12 @@
 [submodule "external/fdlibm"]
 	path = external/fdlibm
 	url = https://android.googlesource.com/platform/external/fdlibm
+[submodule "external/expat"]
+	path = external/expat
+	url = https://android.googlesource.com/platform/external/expat
+[submodule "external/icu4c"]
+	path = external/icu4c
+	url = https://android.googlesource.com/platform/external/icu4c
+[submodule "external/zlib"]
+	path = external/zlib
+	url = https://android.googlesource.com/platform/external/zlib
