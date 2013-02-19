@@ -1,0 +1,1 @@
+android_add_subdirectory(core)

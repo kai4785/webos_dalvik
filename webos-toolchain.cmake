@@ -5,7 +5,8 @@ set(CMAKE_ASM_COMPILE_OBJECT
     "<CMAKE_ASM_COMPILER> <FLAGS> <DEFINES> -c -o <OBJECT> <SOURCE>")
 # Special values for dalvik
 set(TARGET_OS linux)
+#TODO: Fix (Error: selected processor does not support `dmb') if set to true
 set(TARGET_CPU_SMP false)
 set(TARGET_ARCH arm)
 set(TARGET_ARCH_VARIANT armv7-a-neon)
-set(TARGET_GLOBAL_CFLAGS "-mfpu=neon -mfloat-abi=softfp")
+set(TARGET_GLOBAL_CFLAGS "-march=armv6 -mfpu=neon -mfloat-abi=softfp")
