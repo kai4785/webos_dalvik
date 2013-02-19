@@ -15,7 +15,7 @@
 set(LOCAL_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 CLEAR_VARS()
 
-android_include(icu4c_common.cmake)
-android_include(icu4c_i18n.cmake)
+android_add_subdirectory(common)
+android_add_subdirectory(i18n)
 #android_include(icu4c_stubdata.cmake)
 

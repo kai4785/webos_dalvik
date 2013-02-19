@@ -107,6 +107,21 @@ concat(LOCAL_C_INCLUDES += ${c_includes}
                     #external/stlport/stlport
                     )
 concat(LOCAL_CFLAGS ${local_cflags} -DPIC -fPIC)
+##TODO Fix rematch.cpp bug:
+#/home/kai/workspace/webos_dalvik/external/icu4c/i18n/rematch.cpp: In member function ‘void icu_49::RegexMatcher::MatchChunkAt(int32_t, UBool, UErrorCode&)’:
+#/home/kai/workspace/webos_dalvik/external/icu4c/i18n/rematch.cpp:5653: error: unrecognizable insn: (insn 7199 2303 2305 301
+#/home/kai/workspace/webos_dalvik/external/icu4c/i18n/rematch.cpp:4754 (set
+#(reg:SI 11 fp)
+#        (plus:SI (reg:SI 3 r3 [1441])
+#                    (mult:SI (reg/v:SI 14 lr [orig:381 opValue.2253 ] [381])
+#                                    (const_int 32 [0x20])))) -1 (nil))
+#/home/kai/workspace/webos_dalvik/external/icu4c/i18n/rematch.cpp:5653:
+#internal compiler error: in extract_insn, at recog.c:1990
+#Please submit a full bug report,
+#with preprocessed source if appropriate.
+#See <http://gcc.gnu.org/bugs.html> for instructions.
+concat(LOCAL_CFLAGS ${local_cflags} -DUCONFIG_ONLY_COLLATION=1)
+
 set(LOCAL_RTTI_FLAG -frtti)
 #TODO: I don't think we need gabi or stlport for webOS 3.0.5
 #concat(LOCAL_SHARED_LIBRARIES icuuc gabi++ stlport)

@@ -78,7 +78,8 @@ endmacro()
 macro(BUILD_SHARED_LIBRARY)
     message(STATUS "Configuring Shared Library ${LOCAL_MODULE}")
     project(${LOCAL_MODULE} ${ARGN})
-    cmake_policy(SET CMP0018 OLD) # With out this, assembly source files don't get added to the project....
+    # Apparently 2.8.0 doesn't have this, but 2.8.6 does.
+    #cmake_policy(SET CMP0018 OLD) # With out this, assembly source files don't get added to the project....
     set_include_directories()
     add_library(${LOCAL_MODULE}
         SHARED
@@ -109,7 +110,10 @@ endmacro()
 
 macro(CLEAR_VARS)
     unset(LOCAL_MODULE)
-    unset(LOCAL_C_INCLUDES)
+    #GCC normally runs from the source dir in the Android project, but not so
+    #with cmake, so we'll add the source dir to the LOCAL_C_INCLUDES every time
+    set(LOCAL_C_INCLUDES
+        ${CMAKE_CURRENT_SOURCE_DIR})
     set(LOCAL_CFLAGS ${TARGET_GLOBAL_CFLAGS})
     unset(LOCAL_SRC_FILES)
     unset(LOCAL_SHARED_LIBRARIES)

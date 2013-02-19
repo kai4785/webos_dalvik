@@ -67,7 +67,7 @@ set(LOCAL_CFLAGS ${cflags})
 #     LOCAL_CFLAGS += "-D__LITTLE_ENDIAN"
 # endif
 
-set(LOCAL_MODULE libfdlibm)
+set(LOCAL_MODULE fdlibm)
 
 BUILD_STATIC_LIBRARY()
 
