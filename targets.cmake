@@ -40,6 +40,17 @@ macro(concat var)
     list(APPEND ${var} ${ARGN})
 endmacro()
 
+macro(copy_headers headers_to headers)
+    foreach(header ${headers})
+        if(VERBOSE_CONFIG)
+            message("copy_headers: ${CMAKE_CURRENT_SOURCE_DIR}/${header} -> ${CMAKE_BINARY_DIR}/include/${headers_to}/")
+        endif()
+        file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/${header}
+            DESTINATION ${CMAKE_BINARY_DIR}/include/${headers_to}/
+        )
+    endforeach()
+endmacro()
+
 macro(link_all_libs)
     unset(LINK_LIBS)
     list(APPEND LINK_LIBS ${LOCAL_SHARED_LIBRARIES} ${LOCAL_STATIC_LIBRARIES} ${LOCAL_WHOLE_STATIC_LIBRARIES})
@@ -99,6 +110,9 @@ endmacro()
 
 macro(BUILD_SHARED_LIBRARY)
     message(STATUS "Configuring Shared Library ${LOCAL_MODULE}")
+    if(NOT "${LOCAL_COPY_HEADERS_TO}" STREQUAL "")
+        copy_headers(${LOCAL_COPY_HEADERS_TO} "${LOCAL_COPY_HEADERS}")
+    endif()
     project(${LOCAL_MODULE} ${ARGN})
     # Apparently 2.8.0 doesn't have this, but 2.8.6 does.
     #cmake_policy(SET CMP0018 OLD) # With out this, assembly source files don't get added to the project....
@@ -135,10 +149,14 @@ macro(CLEAR_VARS)
     #GCC normally runs from the source dir in the Android project, but not so
     #with cmake, so we'll add the source dir to the LOCAL_C_INCLUDES every time
     set(LOCAL_C_INCLUDES
-        ${CMAKE_CURRENT_SOURCE_DIR})
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_BINARY_DIR}/include
+        )
     set(LOCAL_CFLAGS ${TARGET_GLOBAL_CFLAGS})
     unset(LOCAL_SRC_FILES)
     unset(LOCAL_SHARED_LIBRARIES)
     unset(LOCAL_STATIC_LIBRARIES)
     set(LOCAL_LDFLAGS ${TARGET_GLOBAL_LDFLAGS})
+    unset(LOCAL_COPY_HEADERS_TO)
+    unset(LOCAL_COPY_HEADERS)
 endmacro()

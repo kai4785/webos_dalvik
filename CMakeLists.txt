@@ -26,7 +26,8 @@ set(system_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/webos-system/usr/include)
 set(CMAKE_INSTALL_PREFIX /com.kai.dalvikvm)
 
 # Some Global variables
-set(JNI_H_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/dalvik/libnativehelper/include/nativehelper CACHE STRING "" FORCE)
+#set(JNI_H_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/dalvik/libnativehelper/include/nativehelper CACHE STRING "" FORCE)
+set(JNI_H_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/libnativehelper/include/nativehelper CACHE STRING "" FORCE)
 
 # Some Global C defines, perhaps this goes in the CMAKE_TOOLCHAIN_FILE, or some conditional variables?
 add_definitions(-D_GNU_SOURCE -DOS_SHARED_LIB_FORMAT_STR="lib%s.so" -D_FILE_OFFSET_BITS=64)
@@ -70,12 +71,14 @@ if(DUMMY_PACKAGE)
 else()
     add_subdirectory(external)
     add_subdirectory(system)
-    #android_add_subdirectory(libcore)
+    android_add_subdirectory(libnativehelper)
+    android_add_subdirectory(libcore)
     #android_add_subdirectory(dalvik)
 endif()
 
-message("Make sure you clean externals like so: for proj in external/expat external/fdlibm external/icu4c external/openssl external/safe-iop external/zlib system/core; do pushd $proj; git clean -f -d; git status; popd; done")
-
-#install(PROGRAMS run_dalvik.sh DESTINATION bin)
-
-#include(CPack)
+#message("Make sure you clean externals like so: 
+#for proj in \
+#external/expat external/fdlibm external/icu4c external/openssl external/safe-iop external/zlib system/core libcore libnativehelper; do \
+#    pushd $proj; git clean -f -d; git checkout .; git status; popd;
+#done
+#")

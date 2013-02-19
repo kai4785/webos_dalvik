@@ -556,13 +556,13 @@ set(local_src_files
 )
 
 set(local_c_includes
- ${openssl_INCLUDED_DIR} 
- ${openssl_INCLUDED_DIR}/crypto 
- ${openssl_INCLUDED_DIR}/crypto/asn1 
- ${openssl_INCLUDED_DIR}/crypto/evp 
- ${openssl_INCLUDED_DIR}/crypto/modes 
- ${openssl_INCLUDED_DIR}/include 
- ${openssl_INCLUDED_DIR}/include/openssl 
+ ${openssl_INCLUDE_DIR} 
+ ${openssl_INCLUDE_DIR}/crypto 
+ ${openssl_INCLUDE_DIR}/crypto/asn1 
+ ${openssl_INCLUDE_DIR}/crypto/evp 
+ ${openssl_INCLUDE_DIR}/crypto/modes 
+ ${openssl_INCLUDE_DIR}/include 
+ ${openssl_INCLUDE_DIR}/include/openssl 
  ${zlib_INCLUDE_DIR}
  )
 

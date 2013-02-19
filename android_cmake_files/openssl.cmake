@@ -7,7 +7,6 @@ set(LOCAL_PATH ${CMAKE_CURRENT_SOURCE_DIR})
 # These makefiles are here instead of being Android.mk files in the
 # respective crypto, ssl, and apps directories so
 # that import_openssl.sh import won't remove them.
-set(openssl_INCLUDED_DIR ${LOCAL_PATH} CACHE STRING "" FORCE)
 android_include(Crypto.cmake)
 android_include(Ssl.cmake)
 #android_include(Apps.cmake)

@@ -1,7 +1,7 @@
 set(local_c_includes
-	${openssl_INCLUDED_DIR} 
-	${openssl_INCLUDED_DIR}/include 
-	${openssl_INCLUDED_DIR}/crypto
+	${openssl_INCLUDE_DIR} 
+	${openssl_INCLUDE_DIR}/include 
+	${openssl_INCLUDE_DIR}/crypto
     )
 
 set(local_src_files

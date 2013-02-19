@@ -19,3 +19,12 @@
 [submodule "system/core"]
 	path = system/core
 	url = https://android.googlesource.com/platform/system/core
+[submodule "libcore"]
+	path = libcore
+	url = https://android.googlesource.com/platform/libcore2
+[submodule "dalvik"]
+	path = dalvik
+	url = https://android.googlesource.com/platform/dalvik2
+[submodule "libnativehelper"]
+	path = libnativehelper
+	url = https://android.googlesource.com/platform/libnativehelper
