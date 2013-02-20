@@ -573,42 +573,43 @@ concat(local_c_includes ${log_c_includes})
 # I don't think we'll need this
 #set(local_additional_dependencies ${LOCAL_PATH}/webos-config.cmake ${LOCAL_PATH}/Crypto.cmake)
 
-#######################################
-# target static library
-CLEAR_VARS()
-android_include(webos-config.cmake)
-
-set(LOCAL_SHARED_LIBRARIES ${log_shared_libraries})
-
-if(${TARGET_BUILD_APPS})
-    set(LOCAL_SDK_VERSION 9)
-endif()
-
-concat(LOCAL_SRC_FILES ${local_src_files})
-concat(LOCAL_CFLAGS ${local_c_flags})
-concat(LOCAL_C_INCLUDES ${local_c_includes})
-if(${TARGET_ARCH} STREQUAL arm)
-    concat(LOCAL_SRC_FILES ${arm_src_files})
-    concat(LOCAL_CFLAGS ${arm_cflags})
-endif()
-# TODO: Do this later
-#ifeq ($(TARGET_ARCH),mips)
-#  ifneq (($TARGET_HAS_BIGENDIAN),true)
-#    LOCAL_SRC_FILES += $(mips_src_files)
-#    LOCAL_CFLAGS += $(mips_cflags)
-#  else
-#    LOCAL_SRC_FILES += $(other_arch_src_files)
-#  endif
-#endif
-#ifeq ($(TARGET_ARCH),x86)
-#  LOCAL_SRC_FILES += $(x86_src_files)
-#  LOCAL_SRC_FILES := $(filter-out $(x86_exclude_files),$(LOCAL_SRC_FILES))
-#  LOCAL_CFLAGS += $(x86_cflags)
-#endif
-set(LOCAL_MODULE_TAGS optional)
-set(LOCAL_MODULE crypto_static)
-set(LOCAL_ADDITIONAL_DEPENDENCIES ${local_additional_dependencies})
-BUILD_STATIC_LIBRARY()
+# Save build time, skip _static
+# #######################################
+# # target static library
+# CLEAR_VARS()
+# android_include(webos-config.cmake)
+# 
+# set(LOCAL_SHARED_LIBRARIES ${log_shared_libraries})
+# 
+# if(${TARGET_BUILD_APPS})
+#     set(LOCAL_SDK_VERSION 9)
+# endif()
+# 
+# concat(LOCAL_SRC_FILES ${local_src_files})
+# concat(LOCAL_CFLAGS ${local_c_flags})
+# concat(LOCAL_C_INCLUDES ${local_c_includes})
+# if(${TARGET_ARCH} STREQUAL arm)
+#     concat(LOCAL_SRC_FILES ${arm_src_files})
+#     concat(LOCAL_CFLAGS ${arm_cflags})
+# endif()
+# # TODO: Do this later
+# #ifeq ($(TARGET_ARCH),mips)
+# #  ifneq (($TARGET_HAS_BIGENDIAN),true)
+# #    LOCAL_SRC_FILES += $(mips_src_files)
+# #    LOCAL_CFLAGS += $(mips_cflags)
+# #  else
+# #    LOCAL_SRC_FILES += $(other_arch_src_files)
+# #  endif
+# #endif
+# #ifeq ($(TARGET_ARCH),x86)
+# #  LOCAL_SRC_FILES += $(x86_src_files)
+# #  LOCAL_SRC_FILES := $(filter-out $(x86_exclude_files),$(LOCAL_SRC_FILES))
+# #  LOCAL_CFLAGS += $(x86_cflags)
+# #endif
+# set(LOCAL_MODULE_TAGS optional)
+# set(LOCAL_MODULE crypto_static)
+# set(LOCAL_ADDITIONAL_DEPENDENCIES ${local_additional_dependencies})
+# BUILD_STATIC_LIBRARY()
 
 #######################################
 # target shared library

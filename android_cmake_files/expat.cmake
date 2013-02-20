@@ -70,23 +70,24 @@ set(common_COPY_HEADERS
 # For the device
 # =====================================================
 
-# Device static library
-CLEAR_VARS()
-
-if(${TARGET_ARCH} STREQUAL arm)
-set(LOCAL_SDK_VERSION 8)
-endif()
-
-set(LOCAL_SRC_FILES ${common_SRC_FILES})
-concat(LOCAL_CFLAGS ${common_CFLAGS})
-concat(LOCAL_C_INCLUDES ${common_C_INCLUDES})
-
-set(LOCAL_MODULE expat_static)
-# Probably set this to CMakeLists.txt, but we may not need to
-#set(LOCAL_ADDITIONAL_DEPENDENCIES ${LOCAL_PATH}/Android.mk)
-set(LOCAL_MODULE_TAGS optional)
-
-BUILD_STATIC_LIBRARY()
+# Save build time, skip _static
+# # Device static library
+# CLEAR_VARS()
+# 
+# if(${TARGET_ARCH} STREQUAL arm)
+# set(LOCAL_SDK_VERSION 8)
+# endif()
+# 
+# set(LOCAL_SRC_FILES ${common_SRC_FILES})
+# concat(LOCAL_CFLAGS ${common_CFLAGS})
+# concat(LOCAL_C_INCLUDES ${common_C_INCLUDES})
+# 
+# set(LOCAL_MODULE expat_static)
+# # Probably set this to CMakeLists.txt, but we may not need to
+# #set(LOCAL_ADDITIONAL_DEPENDENCIES ${LOCAL_PATH}/Android.mk)
+# set(LOCAL_MODULE_TAGS optional)
+# 
+# BUILD_STATIC_LIBRARY()
 
 # Device shared library
 CLEAR_VARS()

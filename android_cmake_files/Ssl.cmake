@@ -58,20 +58,21 @@ concat(local_c_includes ${log_c_includes})
 
 #######################################
 # target static library
-CLEAR_VARS()
-android_include(webos-config.cmake)
-
-#ifneq (,$(TARGET_BUILD_APPS))
-#LOCAL_SDK_VERSION := 9
-#endif
-
-concat(LOCAL_SRC_FILES ${local_src_files})
-concat(LOCAL_C_INCLUDES ${local_c_includes})
-set(LOCAL_SHARED_LIBRARIES ${log_shared_libraries})
-set(LOCAL_MODULE_TAGS optional)
-set(LOCAL_MODULE ssl_static)
-set(LOCAL_ADDITIONAL_DEPENDENCIES := ${local_additional_dependencies})
-BUILD_STATIC_LIBRARY()
+# Save build time, skip _static
+# CLEAR_VARS()
+# android_include(webos-config.cmake)
+# 
+# #ifneq (,$(TARGET_BUILD_APPS))
+# #LOCAL_SDK_VERSION := 9
+# #endif
+# 
+# concat(LOCAL_SRC_FILES ${local_src_files})
+# concat(LOCAL_C_INCLUDES ${local_c_includes})
+# set(LOCAL_SHARED_LIBRARIES ${log_shared_libraries})
+# set(LOCAL_MODULE_TAGS optional)
+# set(LOCAL_MODULE ssl_static)
+# set(LOCAL_ADDITIONAL_DEPENDENCIES := ${local_additional_dependencies})
+# BUILD_STATIC_LIBRARY()
 
 #######################################
 # target shared library

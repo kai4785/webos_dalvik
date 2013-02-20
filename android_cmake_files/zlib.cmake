@@ -33,16 +33,16 @@ endif()
 BUILD_SHARED_LIBRARY()
 
 CLEAR_VARS()
-
-set(LOCAL_ARM_MODE arm)
-set(LOCAL_MODULE libz_static)
-set(LOCAL_MODULE_TAGS optional)
-concat(LOCAL_CFLAGS -O3 -DUSE_MMAP)
-set(LOCAL_SRC_FILES ${zlib_files})
-if(${TARGET_ARCH} STREQUAL arm)
-  set(LOCAL_SDK_VERSION 9)
-endif()
-BUILD_STATIC_LIBRARY()
+# Save build time, skip _static
+# set(LOCAL_ARM_MODE arm)
+# set(LOCAL_MODULE libz_static)
+# set(LOCAL_MODULE_TAGS optional)
+# concat(LOCAL_CFLAGS -O3 -DUSE_MMAP)
+# set(LOCAL_SRC_FILES ${zlib_files})
+# if(${TARGET_ARCH} STREQUAL arm)
+#   set(LOCAL_SDK_VERSION 9)
+# endif()
+# BUILD_STATIC_LIBRARY()
 
 # include $(CLEAR_VARS)
 # 

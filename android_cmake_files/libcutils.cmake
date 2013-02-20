@@ -143,9 +143,10 @@ endif() # !arm
 set(LOCAL_C_INCLUDES ${libcutils_c_includes}) # For ashmem-dev.c $(KERNEL_HEADERS)
 set(LOCAL_STATIC_LIBRARIES log_static)
 concat(LOCAL_CFLAGS ${targetSmpFlag})
-#TODO: Fix the need to include the PDK reboot.h for LINUX_REBOOT_MAGIC* values
+#FIXME: Fix the need to include the PDK reboot.h for LINUX_REBOOT_MAGIC* values
 concat(LOCAL_CFLAGS "-include /opt/PalmPDK/arm-gcc/sysroot/usr/include/linux/reboot.h")
-BUILD_STATIC_LIBRARY()
+# Save build time, skip _static
+#BUILD_STATIC_LIBRARY()
 
 #include $(CLEAR_VARS)
 set(LOCAL_MODULE cutils)

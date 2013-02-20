@@ -47,7 +47,8 @@ if(HAVE_SYS_UIO_H)
     add_definitions(-DHAVE_SYS_UIO_H)
 endif()
 if(HAVE_ENDIAN_H)
-    add_definitions(-DHAVE_ENDIAN_H)
+# ./dalvik/vm/Common.h is using stupid HAVE_*_ENDIAN macro, instead of #if __BYTE_ORDER == __LITTLE_ENDIAN -- so we have to be dumb too
+    add_definitions(-DHAVE_ENDIAN_H -DHAVE_LITTLE_ENDIAN)
 endif()
 if(HAVE_PTHREADS)
     add_definitions(-DHAVE_PTHREADS)
@@ -79,7 +80,7 @@ endif()
 
 #message("Make sure you clean externals like so: 
 #for proj in \
-#external/expat external/fdlibm external/icu4c external/openssl external/safe-iop external/zlib system/core libcore libnativehelper; do \
+#external/expat external/fdlibm external/icu4c external/openssl external/safe-iop external/zlib system/core libcore libnativehelper dalvik; do \
 #    pushd $proj; git clean -f -d; git checkout .; git status; popd;
 #done
 #")
