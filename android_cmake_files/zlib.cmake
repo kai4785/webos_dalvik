@@ -78,25 +78,26 @@ BUILD_STATIC_LIBRARY()
 # LOCAL_ARM_MODE := arm
 # include $(BUILD_HOST_STATIC_LIBRARY)
 # 
-CLEAR_VARS()
-set(LOCAL_SRC_FILES ${zlib_files})
-set(LOCAL_MODULE libunz)
-set(LOCAL_ARM_MODE arm)
-if(${TARGET_ARCH} STREQUAL arm)
-  set(LOCAL_SDK_VERSION 9)
-endif()
-BUILD_STATIC_LIBRARY()
-
-CLEAR_VARS()
-
-set(LOCAL_SRC_FILES
-	src/test/minigzip.c)
-
-set(LOCAL_MODULE gzip)
-
-set(LOCAL_SHARED_LIBRARIES libz)
-
-BUILD_EXECUTABLE()
+# These work, but we don't really need them
+#CLEAR_VARS()
+#set(LOCAL_SRC_FILES ${zlib_files})
+#set(LOCAL_MODULE libunz)
+#set(LOCAL_ARM_MODE arm)
+#if(${TARGET_ARCH} STREQUAL arm)
+#  set(LOCAL_SDK_VERSION 9)
+#endif()
+#BUILD_STATIC_LIBRARY()
+#
+# CLEAR_VARS()
+# 
+# set(LOCAL_SRC_FILES
+# 	src/test/minigzip.c)
+# 
+# set(LOCAL_MODULE gzip)
+# 
+# set(LOCAL_SHARED_LIBRARIES libz)
+# 
+# BUILD_EXECUTABLE()
 
 # include $(CLEAR_VARS)
 # 

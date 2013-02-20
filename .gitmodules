@@ -28,3 +28,6 @@
 [submodule "libnativehelper"]
 	path = libnativehelper
 	url = https://android.googlesource.com/platform/libnativehelper
+[submodule "bionic"]
+	path = bionic
+	url = https://android.googlesource.com/platform/bionic

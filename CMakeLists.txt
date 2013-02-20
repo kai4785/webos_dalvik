@@ -64,6 +64,7 @@ option(DUMMY_PACKAGE "Build a dummy package for WebOS 3.0.5" Off)
 
 include(targets.cmake)
 include(webos-package.cmake)
+configure_file(${CMAKE_SOURCE_DIR}/cpu-features.h.in ${CMAKE_BINARY_DIR}/include/machine/cpu-features.h)
 
 # And we're off!
 if(DUMMY_PACKAGE)
@@ -73,7 +74,7 @@ else()
     add_subdirectory(system)
     android_add_subdirectory(libnativehelper)
     android_add_subdirectory(libcore)
-    #android_add_subdirectory(dalvik)
+    android_add_subdirectory(dalvik)
 endif()
 
 #message("Make sure you clean externals like so: 
