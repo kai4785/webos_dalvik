@@ -144,6 +144,9 @@ else()  # !arm
     #    LOCAL_SRC_FILES += memory.c
     #endif() # !x86-atom
 endif() # !arm
+#For strlcpy:
+concat(LOCAL_CFLAGS -DHAVE_MEMSET16 -DHAVE_MEMSET32)
+concat(LOCAL_SRC_FILES memory.c)
 
 set(LOCAL_C_INCLUDES ${libcutils_c_includes}) # For ashmem-dev.c $(KERNEL_HEADERS)
 #set(LOCAL_STATIC_LIBRARIES log_static)
@@ -157,6 +160,7 @@ set(LOCAL_MODULE cutils)
 set(LOCAL_SHARED_LIBRARIES log)
 #LOCAL_CFLAGS += $(targetSmpFlag)
 #LOCAL_C_INCLUDES := $(libcutils_c_includes)
+set(LOCAL_LDLIBS -lpthread)
 BUILD_SHARED_LIBRARY()
 
 # Don't care right now

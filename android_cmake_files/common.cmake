@@ -147,6 +147,8 @@ set(LOCAL_SRC_FILES ${src_files})
 set(LOCAL_C_INCLUDES ${c_includes}
                     abi/cpp/include)
 set(LOCAL_CFLAGS ${local_cflags} -DPIC -fPIC)
+# avoid libicuuc.so: undefined symbol: __sync_val_compare_and_swap_4
+concat(LOCAL_CFLAGS -DU_HAVE_GCC_ATOMICS=0)
 set(LOCAL_RTTI_FLAG -frtti)
 # TODO: We don't need gabi++ right?
 #concat(LOCAL_SHARED_LIBRARIES gabi++ dl)

@@ -55,8 +55,8 @@ set(LOCAL_SRC_FILES ${dex_src_files})
 concat(LOCAL_C_INCLUDES ${dex_include_files})
 set(LOCAL_MODULE_TAGS optional)
 set(LOCAL_MODULE dex)
-BUILD_SHARED_LIBRARY()
-#BUILD_STATIC_LIBRARY()
+#BUILD_SHARED_LIBRARY()
+BUILD_STATIC_LIBRARY()
 
 #endif() # !SDK_ONLY
 

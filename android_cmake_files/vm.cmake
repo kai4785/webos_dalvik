@@ -66,13 +66,13 @@ set(LOCAL_ASFLAGS ${LOCAL_CFLAGS})
 
 BUILD_SHARED_LIBRARY()
 
-# Derivation #1
-# Enable assertions and JIT tuning
-android_include(ReconfigureDvm.cmake)
-concat(LOCAL_CFLAGS -UNDEBUG -DDEBUG=1 -DLOG_NDEBUG=1 -DWITH_DALVIK_ASSERT
-                -DWITH_JIT_TUNING ${target_smp_flag})
-set(LOCAL_MODULE dvm_assert)
-BUILD_SHARED_LIBRARY()
+# # Derivation #1
+# # Enable assertions and JIT tuning
+# android_include(ReconfigureDvm.cmake)
+# concat(LOCAL_CFLAGS -UNDEBUG -DDEBUG=1 -DLOG_NDEBUG=1 -DWITH_DALVIK_ASSERT
+#                 -DWITH_JIT_TUNING ${target_smp_flag})
+# set(LOCAL_MODULE dvm_assert)
+# BUILD_SHARED_LIBRARY()
 
 #ifneq ($(dvm_arch),mips)    # MIPS support for self-verification is incomplete
 #
@@ -88,15 +88,15 @@ BUILD_SHARED_LIBRARY()
 #
 #endif # dvm_arch!=mips
 
-# Derivation #3
-# Compile out the JIT
-set(WITH_JIT false)
-android_include(ReconfigureDvm.cmake)
-concat(LOCAL_CFLAGS ${target_smp_flag})
-# TODO: split out the asflags.
-set(LOCAL_ASFLAGS ${LOCAL_CFLAGS})
-set(LOCAL_MODULE dvm_interp)
-BUILD_SHARED_LIBRARY()
+# # Derivation #3
+# # Compile out the JIT
+# set(WITH_JIT false)
+# android_include(ReconfigureDvm.cmake)
+# concat(LOCAL_CFLAGS ${target_smp_flag})
+# # TODO: split out the asflags.
+# set(LOCAL_ASFLAGS ${LOCAL_CFLAGS})
+# set(LOCAL_MODULE dvm_interp)
+# BUILD_SHARED_LIBRARY()
 
 
 # #

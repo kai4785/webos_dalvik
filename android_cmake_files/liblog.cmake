@@ -69,16 +69,18 @@ set(liblog_host_sources ${liblog_sources} fake_log_device.c)
 
 # Shared and static library for target
 # ========================================================
-CLEAR_VARS()
-set(LOCAL_MODULE log_static)
-#set(LOCAL_SRC_FILES ${liblog_sources})
-# For now, fake log it
-set(LOCAL_SRC_FILES ${liblog_host_sources})
-BUILD_STATIC_LIBRARY()
+#CLEAR_VARS()
+#set(LOCAL_MODULE log_static)
+##set(LOCAL_SRC_FILES ${liblog_sources})
+## For now, fake log it
+#set(LOCAL_SRC_FILES ${liblog_host_sources})
+#BUILD_STATIC_LIBRARY()
 
 CLEAR_VARS()
 set(LOCAL_MODULE log)
 #set(LOCAL_SRC_FILES ${liblog_sources})
 # For now, fake log it
 set(LOCAL_SRC_FILES ${liblog_host_sources})
+set(LOCAL_LDLIBS -lpthread)
+set(LOCAL_CFLAGS -DFAKE_LOG_DEVICE=1)
 BUILD_SHARED_LIBRARY()
