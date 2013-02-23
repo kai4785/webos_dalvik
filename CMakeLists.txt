@@ -62,7 +62,7 @@ endif()
 option(DEBUG_DALVIK_VM "Debug Dalvik?" On)
 option(VERBOSE_CONFIG "Verbose configuration messages" Off)
 option(FOR_HOST "Build for the host, not a target" Off)
-option(DUMMY_PACKAGE "Build a dummy package for WebOS 3.0.5" Off)
+option(TEST "Build a dltest executable" Off)
 
 include(targets.cmake)
 include(webos-package.cmake)
@@ -70,15 +70,14 @@ set(system_INCLUDE_DIR ${CMAKE_BINARY_DIR}/include)
 configure_file(${CMAKE_SOURCE_DIR}/cpu-features.h.in ${CMAKE_BINARY_DIR}/include/machine/cpu-features.h)
 
 # And we're off!
-if(DUMMY_PACKAGE)
+if(TEST)
     add_subdirectory(test)
-else()
-    add_subdirectory(external)
-    add_subdirectory(system)
-    android_add_subdirectory(libnativehelper)
-    android_add_subdirectory(libcore)
-    android_add_subdirectory(dalvik)
 endif()
+add_subdirectory(external)
+add_subdirectory(system)
+android_add_subdirectory(libnativehelper)
+android_add_subdirectory(libcore)
+android_add_subdirectory(dalvik)
 
 #message("Make sure you clean externals like so: 
 #for proj in \

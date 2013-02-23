@@ -39,9 +39,9 @@ set(LOCAL_SRC_FILES ${dalvikvm_src_files})
 set(LOCAL_C_INCLUDES ${dalvikvm_c_includes})
 
 set(LOCAL_SHARED_LIBRARIES
-    dvm
-    ssl
     libz
+    ssl
+    dvm
     )
 
 set(LOCAL_MODULE_TAGS optional)

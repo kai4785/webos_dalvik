@@ -146,7 +146,7 @@ else()  # !arm
 endif() # !arm
 
 set(LOCAL_C_INCLUDES ${libcutils_c_includes}) # For ashmem-dev.c $(KERNEL_HEADERS)
-set(LOCAL_STATIC_LIBRARIES log_static)
+#set(LOCAL_STATIC_LIBRARIES log_static)
 concat(LOCAL_CFLAGS ${targetSmpFlag})
 # Save build time, skip _static
 #BUILD_STATIC_LIBRARY()

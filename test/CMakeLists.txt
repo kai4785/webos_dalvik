@@ -1,19 +1,10 @@
-project(dalvikvm)
-write_file(${CMAKE_CURRENT_BINARY_DIR}/dalvikvm.c "#include <stdio.h>
-int main(int argc, char **argv, char** envp)
-{
-    char** env;
-    for (env = envp; *env != 0; env++)
-    {
-        char* thisEnv = *env;
-        printf(\"%s\\n\", thisEnv);    
-    }
-}"
-)
+CLEAR_VARS()
 
-add_executable(${PROJECT_NAME}
-    ${CMAKE_CURRENT_BINARY_DIR}/dalvikvm.c
-    )
-install(TARGETS ${PROJECT_NAME}
-    DESTINATION .
-    )
+set(LOCAL_SRC_FILES
+	dltest.c)
+
+set(LOCAL_MODULE dltest)
+
+set(LOCAL_LDFLAGS -ldl)
+
+BUILD_EXECUTABLE()
