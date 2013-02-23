@@ -121,6 +121,7 @@ macro(BUILD_SHARED_LIBRARY)
         SHARED
         ${LOCAL_SRC_FILES}
     )
+    #concat(LOCAL_CFLAGS -fPIC)
     set_flags()
     link_all_libs()
     install(TARGETS ${LOCAL_MODULE}
@@ -152,7 +153,8 @@ macro(CLEAR_VARS)
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${CMAKE_BINARY_DIR}/include
         )
-    set(LOCAL_CFLAGS ${TARGET_GLOBAL_CFLAGS})
+    #set(LOCAL_CFLAGS ${TARGET_GLOBAL_CFLAGS})
+    set(LOCAL_CFLAGS)
     unset(LOCAL_SRC_FILES)
     unset(LOCAL_SHARED_LIBRARIES)
     unset(LOCAL_STATIC_LIBRARIES)
