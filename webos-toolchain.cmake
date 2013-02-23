@@ -10,7 +10,8 @@ set(ASM_DIALECT)
 set(CMAKE_ASM${ASM_DIALECT}_COMPILE_OBJECT "<CMAKE_ASM${ASM_DIALECT}_COMPILER> <FLAGS> -o <OBJECT> <SOURCE> -c")
 # Special values for dalvik
 set(TARGET_OS linux)
-#TODO: Fix (Error: selected processor does not support `dmb') if set to true
+#FIXME: Fix (Error: selected processor does not support `dmb') if set to true
+#FIXME: Fix (Error: bad barrier type -- `dmb st') if set to true
 set(TARGET_CPU_SMP false)
 set(TARGET_ARCH arm)
 set(TARGET_ARCH_VARIANT armv7-a-neon)

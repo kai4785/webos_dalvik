@@ -76,12 +76,13 @@ set(commonHostSources
 #    commonSources += 
 #        uio.c
 #else
-#    commonSources += 
-#        abort_socket.c 
-#        fs.c 
-#        selector.c 
-#        multiuser.c 
-#        zygote.c
+    concat(commonSources
+        abort_socket.c 
+        fs.c 
+        selector.c 
+        multiuser.c 
+        zygote.c
+        )
 #endif
 
 
@@ -127,6 +128,8 @@ set(LOCAL_SRC_FILES ${commonSources}
         qtaguid.c 
         uevent.c
         )
+#FIXME: Fix dlmalloc to actually work properly please.
+concat(LOCAL_SRC_FILES dlmalloc_stubs.c)
 
 if(${TARGET_ARCH} STREQUAL arm)
     concat(LOCAL_SRC_FILES arch-arm/memset32.S)
