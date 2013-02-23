@@ -17,11 +17,12 @@ else()
     include(webos-toolchain.cmake) #Must be done before the first "project" call
 endif()
 
+enable_language(ASM-ATT)
+enable_language(ASM)
 project(webos_dalvik)
 
 # TODO: Not sure what other options we have here
 set(HOST_OS "linux")
-set(system_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/webos-system/usr/include)
 # Not sure how to do this just yet. Probably with a make DESTIR=com.appname.something
 set(CMAKE_INSTALL_PREFIX /com.kai.dalvikvm)
 
@@ -65,6 +66,7 @@ option(DUMMY_PACKAGE "Build a dummy package for WebOS 3.0.5" Off)
 
 include(targets.cmake)
 include(webos-package.cmake)
+set(system_INCLUDE_DIR ${CMAKE_BINARY_DIR}/include)
 configure_file(${CMAKE_SOURCE_DIR}/cpu-features.h.in ${CMAKE_BINARY_DIR}/include/machine/cpu-features.h)
 
 # And we're off!

@@ -233,6 +233,7 @@ concat(LOCAL_C_INCLUDES
 	${vm_INCLUDE_DIR}
 	${zlib_INCLUDE_DIR}
 	${libcore_INCLUDE_DIR}/include 
+    ${system_INCLUDE_DIR}
     )
 
 set(MTERP_ARCH_KNOWN false)

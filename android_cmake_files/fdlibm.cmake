@@ -42,7 +42,7 @@ set(src_files
 # This is necessary to guarantee that the FDLIBM functions are in
 # "IEEE spirit", i.e. to guarantee that the IEEE 754 core functions
 # are used.
-set(cflags "-D_LIB_VERSION_TYPE=\"const enum _IEEE_\"")
+#set(cflags "-D_LIB_VERSION_TYPE=\"const enum _IEEE_\"")
 
 # Disable GCC optimizations that interact badly with this crufty
 # library (see their own admission in 'readme'). Without this, we
