@@ -117,8 +117,10 @@ set(commonHostSources
 
 CLEAR_VARS()
 set(LOCAL_MODULE cutils_static)
+#FIXME: Fix the need to include the PDK reboot.h for LINUX_REBOOT_MAGIC* values in android_reboot.c
+#concat(LOCAL_CFLAGS "-include /opt/PalmPDK/arm-gcc/sysroot/usr/include/linux/reboot.h")
 set(LOCAL_SRC_FILES ${commonSources}
-        android_reboot.c 
+        #android_reboot.c # NOTE: I don't think we need this for dalivkvm
         #ashmem-dev.c 
         ashmem-host.c #TODO: Port ashmem to webOS
         debugger.c 
@@ -146,8 +148,6 @@ endif() # !arm
 set(LOCAL_C_INCLUDES ${libcutils_c_includes}) # For ashmem-dev.c $(KERNEL_HEADERS)
 set(LOCAL_STATIC_LIBRARIES log_static)
 concat(LOCAL_CFLAGS ${targetSmpFlag})
-#FIXME: Fix the need to include the PDK reboot.h for LINUX_REBOOT_MAGIC* values
-concat(LOCAL_CFLAGS "-include /opt/PalmPDK/arm-gcc/sysroot/usr/include/linux/reboot.h")
 # Save build time, skip _static
 #BUILD_STATIC_LIBRARY()
 

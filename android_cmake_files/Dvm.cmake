@@ -79,6 +79,8 @@ endif()  # !dvm_make_debug_vm
 # bug hunting: checksum and verify interpreted stack when making JNI calls
 #concat(LOCAL_CFLAGS += -DWITH_JNI_STACK_CHECK)
 
+configure_file(${CMAKE_SOURCE_DIR}/dalvik_system_Zygote-stub.cpp.in native/dalvik_system_Zygote-stub.cpp)
+
 set(LOCAL_SRC_FILES
 	AllocTracker.cpp 
 	Atomic.cpp#.arm 
@@ -149,6 +151,7 @@ set(LOCAL_SRC_FILES
 	native/dalvik_system_VMRuntime.cpp 
 	native/dalvik_system_VMStack.cpp 
 	#native/dalvik_system_Zygote.cpp 
+	native/dalvik_system_Zygote-stub.cpp 
 	native/java_lang_Class.cpp 
 	native/java_lang_Double.cpp 
 	native/java_lang_Float.cpp 

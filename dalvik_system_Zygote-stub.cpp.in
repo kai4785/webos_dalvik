@@ -1,0 +1,80 @@
+/* Garbage hack to satisfy webos build */
+
+/*
+ * Copyright (C) 2008 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * dalvik.system.Zygote
+ */
+#include "Dalvik.h"
+#include "native/InternalNativePriv.h"
+
+#define ZYGOTE_LOG_TAG "Zygote"
+
+/* must match values in dalvik.system.Zygote */
+enum {
+    DEBUG_ENABLE_DEBUGGER           = 1,
+    DEBUG_ENABLE_CHECKJNI           = 1 << 1,
+    DEBUG_ENABLE_ASSERT             = 1 << 2,
+    DEBUG_ENABLE_SAFEMODE           = 1 << 3,
+    DEBUG_ENABLE_JNI_LOGGING        = 1 << 4,
+};
+
+/* must match values in dalvik.system.Zygote */
+enum {
+    MOUNT_EXTERNAL_NONE = 0,
+    MOUNT_EXTERNAL_SINGLEUSER = 1,
+    MOUNT_EXTERNAL_MULTIUSER = 2,
+    MOUNT_EXTERNAL_MULTIUSER_ALL = 3,
+};
+
+/* native public static int fork(); */
+static void Dalvik_dalvik_system_Zygote_fork(const u4* args, JValue* pResult)
+{
+    return;
+}
+
+/*
+ * native public static int nativeForkAndSpecialize(int uid, int gid,
+ *     int[] gids, int debugFlags, int[][] rlimits, int mountExternal,
+ *     String seInfo, String niceName);
+ */
+static void Dalvik_dalvik_system_Zygote_forkAndSpecialize(const u4* args,
+    JValue* pResult)
+{
+    return;
+}
+
+/*
+ * native public static int nativeForkSystemServer(int uid, int gid,
+ *     int[] gids, int debugFlags, int[][] rlimits,
+ *     long permittedCapabilities, long effectiveCapabilities);
+ */
+static void Dalvik_dalvik_system_Zygote_forkSystemServer(
+        const u4* args, JValue* pResult)
+{
+    return;
+}
+
+const DalvikNativeMethod dvm_dalvik_system_Zygote[] = {
+    { "nativeFork", "()I",
+      Dalvik_dalvik_system_Zygote_fork },
+    { "nativeForkAndSpecialize", "(II[II[[IILjava/lang/String;Ljava/lang/String;)I",
+      Dalvik_dalvik_system_Zygote_forkAndSpecialize },
+    { "nativeForkSystemServer", "(II[II[[IJJ)I",
+      Dalvik_dalvik_system_Zygote_forkSystemServer },
+    { NULL, NULL, NULL },
+};
