@@ -21,10 +21,10 @@
 	url = https://android.googlesource.com/platform/system/core
 [submodule "libcore"]
 	path = libcore
-	url = https://android.googlesource.com/platform/libcore2
+	url = https://android.googlesource.com/platform/libcore
 [submodule "dalvik"]
 	path = dalvik
-	url = https://android.googlesource.com/platform/dalvik2
+	url = https://android.googlesource.com/platform/dalvik
 [submodule "libnativehelper"]
 	path = libnativehelper
 	url = https://android.googlesource.com/platform/libnativehelper

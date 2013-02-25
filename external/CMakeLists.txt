@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 android_add_subdirectory(safe-iop)
 android_add_subdirectory(fdlibm)
+set(expat_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/expat CACHE STRING "" FORCE)
 android_add_subdirectory(expat)
 
 # WebOS 3.0.5 has incompatible zlib built-in

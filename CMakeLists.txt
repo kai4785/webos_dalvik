@@ -19,6 +19,22 @@ endif()
 
 enable_language(ASM-ATT)
 enable_language(ASM)
+
+if(NOT GIT_TAG)
+    #libnative helper was moved to ${CMAKE_SOURCE_DIR} in 4.1
+    set(GIT_TAG android-4.0.4_r2.1)
+    #set(GIT_TAG master)
+endif()
+option(GIT_CLEAN "Clean out changes to git submodules" On)
+
+set(submodules external/expat external/fdlibm external/icu4c external/openssl external/safe-iop external/zlib system/core libcore libnativehelper dalvik)
+#FIXME Figure out how to make this work. Probably custom target so we can set CWD
+foreach(module ${submodules})
+    execute_process(COMMAND cd ${CMAKE_SOURCE_DIR} && git submodule foreach git clean -f -d)
+    execute_process(COMMAND cd ${CMAKE_SOURCE_DIR} && git submodule foreach git checkout .)
+    execute_process(COMMAND cd ${CMAKE_SOURCE_DIR} && git submodule foreach git checkout ${GIT_TAG})
+endforeach()
+
 project(webos_dalvik)
 
 # TODO: Not sure what other options we have here
@@ -75,13 +91,9 @@ if(TEST)
 endif()
 add_subdirectory(external)
 add_subdirectory(system)
-android_add_subdirectory(libnativehelper)
+if(${GIT_TAG} STREQUAL master)
+    android_add_subdirectory(libnativehelper)
+endif()
 android_add_subdirectory(libcore)
 android_add_subdirectory(dalvik)
 
-#message("Make sure you clean externals like so: 
-#for proj in \
-#external/expat external/fdlibm external/icu4c external/openssl external/safe-iop external/zlib system/core libcore libnativehelper dalvik; do \
-#    pushd $proj; git clean -f -d; git checkout .; git status; popd;
-#done
-#")
