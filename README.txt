@@ -35,11 +35,18 @@ $ palm-install com.kai.dalvikvm*.ipk
 
 With the ipk installed, you're almost ready. First, create a dalvik-cache directory, and cd to the applications directory
 # mkdir /media/internal/dalvik-cache
-# cd /media/cryptofs/apps/usr/palm/applications
 
-Now, set a few environmental variables, and fire off the command:
-# ANDROID_ROOT=$PWD/com.kai.dalvikvm ANDROID_DATA=/media/internal LD_LIBRARY_PATH=com.kai.dalvikvm/lib ./com.kai.dalvikvm/bin/dalvikvm -Xbootclasspath:$PWD/com .kai.dalvikvm/framework/core.jar -classpath ./com.kai.dalvikvm/CmdLine.jar org.apache.HelloWorld
+Next, get a jar file to test. Here, have one of mine:
+# mkdir /media/internal/android-jars/
+# wget -O /media/internal/android-jars/CmdLine.jar http://kai.gnukai.com/CmdLine.jar
+
+Now, cd here to shorten some of the copy-paste text, set a few environmental variables, and fire off the command:
+# cd /media/cryptofs/apps/usr/palm/applications
+# ANDROID_ROOT=$PWD/com.kai.dalvikvm ANDROID_DATA=/media/internal LD_LIBRARY_PATH=com.kai.dalvikvm/lib ./com.kai.dalvikvm/bin/dalvikvm -Xbootclasspath:$PWD/com .kai.dalvikvm/framework/core.jar -classpath /media/internal/android-jars/CmdLine.jar org.apache.HelloWorld
 
 The first time it runs, it will take a moment to create the dex cache files in /media/internal/dalvik-cache, so don't panic if it takes 3-5 seconds before it does anything.
 
-I haven't ironed out the kinks with the icudt46l.dat file to work out of the box yet, and it may complain that /media/internal/dalvik-cache isn't created yet. Hopefully I'll have these issues fixed (or better documented) soon.
+If all went well, you should be staring at the output:
+Hello World!
+
+Hurray!
