@@ -117,7 +117,7 @@ set(c_includes
 # device and sim builds can use the same codepath, and it's hard to break one
 # without noticing because the other still works.
 set(local_cflags '-DICU_DATA_DIR_PREFIX_ENV_VAR="ANDROID_ROOT"')
-concat(local_cflags '-DICU_DATA_DIR="/usr/icu"')
+concat(local_cflags '-DICU_DATA_DIR="/media/internal/icu"')
 
 concat(local_cflags -D_REENTRANT -DU_COMMON_IMPLEMENTATION -O3 -fvisibility=hidden)
 set(local_ldlibs -lpthread -lm)
