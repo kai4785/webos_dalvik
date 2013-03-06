@@ -100,4 +100,7 @@ if(${GIT_TAG} STREQUAL master)
 endif()
 android_add_subdirectory(libcore)
 android_add_subdirectory(dalvik)
-
+if(WORK_IN_PROGRESS)
+    android_add_subdirectory(frameworks/base/core/jni)
+    android_add_subdirectory(frameworks/base/cmds/app_process)
+endif()

@@ -1,19 +1,22 @@
 set(android_dir android_cmake_files-${GIT_TAG})
+
 macro(android_add_subdirectory dir)
+    get_filename_component(base ${dir} NAME)
     execute_process(
-        COMMAND ln -sf ${CMAKE_SOURCE_DIR}/${android_dir}/${dir}.cmake ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt
+        COMMAND ln -sf ${CMAKE_SOURCE_DIR}/${android_dir}/${base}.cmake ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt
     )
     if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt)
         message(FATAL_ERROR "android_add_subdirectory failed! ${CMAKE_CURRENT_SOURCE_DIR}/${dir}/CMakeLists.txt")
     endif()
     add_subdirectory(${dir})
 endmacro()
-macro(android_include file)
+macro(android_include path)
+    get_filename_component(file ${path} NAME)
     execute_process(
-        COMMAND ln -sf ${CMAKE_SOURCE_DIR}/${android_dir}/${file} ${CMAKE_CURRENT_SOURCE_DIR}/${file}
+        COMMAND ln -sf ${CMAKE_SOURCE_DIR}/${android_dir}/${file} ${CMAKE_CURRENT_SOURCE_DIR}/${path}
     )
-    if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${file})
-        message(FATAL_ERROR "android_include failed to copy!  ${CMAKE_CURRENT_SOURCE_DIR}/${file}")
+    if(NOT EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${path})
+        message(FATAL_ERROR "android_include failed to copy!  ${CMAKE_CURRENT_SOURCE_DIR}/${path}")
     endif()
     include(${file})
 endmacro()

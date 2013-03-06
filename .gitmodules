@@ -31,3 +31,21 @@
 [submodule "bionic"]
 	path = bionic
 	url = https://android.googlesource.com/platform/bionic
+[submodule "frameworks/base"]
+	path = frameworks/base
+	url = https://android.googlesource.com/platform/frameworks/base
+[submodule "external/skia"]
+	path = external/skia
+	url = https://android.googlesource.com/platform/external/skia
+[submodule "external/giflib"]
+	path = external/giflib
+	url = https://android.googlesource.com/platform/external/giflib
+[submodule "external/libpng"]
+	path = external/libpng
+	url = https://android.googlesource.com/platform/external/libpng
+[submodule "external/webp"]
+	path = external/webp
+	url = https://android.googlesource.com/platform/external/webp
+[submodule "external/jpeg"]
+	path = external/jpeg
+	url = https://android.googlesource.com/platform/external/jpeg

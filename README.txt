@@ -11,6 +11,17 @@ I'm also only targeting the webOS 3.0.5 PDK, rather than Open webOS for now,
 because I think it will be easer to go forward to Open webOS, than backwards
 to 3.0.5.
 
+It's also important to remember not to commit any changes to the submodule
+repositories. We don't want to interrupt any of the Android work flow, and we
+also don't want to commit anything to our source that depends on changing
+upstream Android source. To that effect, make sure you always test your cmake
+build after running:
+$ git submodule foreach git clean -f -d
+$ git submodule foreach git checkout .
+This shouldn't be required the very first time you checkout/clone the repo, but
+running CMake even once will create symlinks that aren't part of the upstream
+repositories.
+
 Build with cmake like you would any other project:
 $ mkdir <source dir> && cd <source dir>
 $ git clone --recursive https://github.com/kai4785/webos_dalvik.git
@@ -64,19 +75,10 @@ Run the dalvik test suite in dalvik/tests on the webOS device. Since there's no 
 
 Zygote
 http://coltf.blogspot.com/p/android-os-processes-and-zygote.html
-I gutted the zygote cpp file in the dalvik tree because it wouldn't easily compile. Looks like that needs fixing now.
+http://elinux.org/Android_Zygote_Startup
+This requires running app_process, which is the program that initializes all of the system libraries, like graphics, audio, ect.
+The bulk of that work is from the library 'android_runtime'. We need to decide how much of 'android_runtime' we use, and how much we just do ourselves. 
+This is where the *real* porting work is.
 
-Hello World apk
-http://androidcodemonkey.blogspot.com/2010/01/hello-world-your-first-android.html
-
-If you try to run the apk right now, it should be encouraging if you see this output:
-# ./com.kai.dalvikvm/bin/dalvikvm -classpath /media/internal/android-jars/Hello\ World.apk com.android.test.HelloWorld
-Dalvik VM unable to find static main(String[]) in 'com/android/test/HelloWorld'
-W/dalvikvm(15383): threadid=1: thread exiting with uncaught exception (group=0x2b5b21f8)
-java.lang.NoSuchMethodError: no static method with name='main' signature='([Ljava/lang/String;)V' in class Lcom/android/test/HelloWorld;
-    at dalvik.system.NativeStart.main(Native Method)
-
-
-Dalvik documentation says you should also include policy.jar and services.jar, but I haven't generated or needed them yet.
-# export BOOTCLASSPATH=$PWD/com.kai.dalvikvm/framework/core.jar:$PWD/com.kai.dalvikvm/framework/ext.jar:$PWD/com.kai.dalvikvm/framework/framework.jar:$PWD/com.kai.dalvikvm/android.framework/policy.jar:$PWD/com.kai.dalvikvm/framework/services.jar
+In order to allow builds for dalvikvm to continue to work with out interruption, I've put all the app_process work inside an if(WORK_IN_PROGRESS) block in the main CMakeLists.txt. If you want to see how ap_process is progressing, you'll want to add "-DWORK_IN_PROGRESS=True" to your cmake line.
 
