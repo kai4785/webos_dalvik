@@ -13,8 +13,13 @@ set(TARGET_OS linux)
 set(TARGET_CPU_SMP false)
 set(TARGET_ARCH arm)
 #set(TARGET_ARCH_VARIANT armv7-a-neon)
-#set(TARGET_GLOBAL_CFLAGS "-march=armv7-a -mfpu=neon -mfloat-abi=softfp")
 set(TARGET_ARCH_VARIANT armv7-a)
-set(TARGET_GLOBAL_CFLAGS "-march=armv7-a -mtune=cortex-a8 -mfpu=neon -ftree-vectorize -mfloat-abi=softfp")
+set(TARGET_GLOBAL_CFLAGS 
+#    -march=armv7-a -mfpu=neon -mfloat-abi=softfp
+    -march=armv7-a -mtune=cortex-a8 -mfpu=neon -ftree-vectorize -mfloat-abi=softfp
+    -include webOSConfig.h
+    -D_GNU_SOURCE
+    #-D_FILE_OFFSET_BITS=64
+)
 #set(TARGET_GLOBAL_CFLAGS "-march=armv7-a -mfpu=vfp -mfloat-abi=softfp")
 add_definitions(${TARGET_GLOBAL_CFLAGS})
