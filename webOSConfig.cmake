@@ -8,7 +8,8 @@ include(CheckTypeSize)
 include(CheckStructHasMember)
 check_include_files(pthread.h HAVE_PTHREADS)
 check_function_exists(pthread_setname_np HAVE_ANDROID_PTHREAD_SETNAME_NP)
-check_symbol_exists(SYS_futex syscall.h HAVE_FUTEX)
+check_function_exists(futex HAVE_FUTEX)
+#check_symbol_exists(SYS_futex syscall.h HAVE_SYS_FUTEX) #this only works if we force include syscall.h on the files that want to call futex()
 set(HAVE_FUTEX_WRAPPERS) # We aren't compiling against bionic
 check_function_exists(fork HAVE_FORK)
 check_function_exists(execl HAVE_EXEC)
@@ -29,12 +30,15 @@ check_library_exists(pthread pthread_cond_timedwait_monotonic "" HAVE_TIMEDWAIT_
 check_include_files(sys/epoll.h HAVE_EPOLL)
 check_include_files (endian.h HAVE_ENDIAN_H)
 set(HAVE_LITTLE_ENDIAN True) # Always true?
+set(CMAKE_REQUIRED_DEFINITIONS -D_GNU_SOURCE)
 check_type_size(off64_t HAVE_OFF64_T) # We could if we could set -D_FILE_OFFSET_BITS=64 correctly
+set(CMAKE_REQUIRED_DEFINITIONS)
 check_type_size(loff_t HAVE_LOFF_T)
 check_function_exists(backtrace HAVE_BACKTRACE)
 check_function_exists(dladdr HAVE_DLADDR)
 check_include_files(cxxabi.h HAVE_CXXABI) # This should be found in /opt/PalmPDK/arm-gcc/arm-none-linux-gnueabi/include/c++/4.3.3/cxxabi.h
-check_symbol_exists(SYS_gettid syscall.h HAVE_GETTID) # gettid() actually doesn't exist by itself, one must call syscall(SYS_gettid); instead
+check_function_exists(gettid HAVE_GETTID) # gettid() actually doesn't exist by itself, one must call syscall(SYS_gettid); instead
+#check_symbol_exists(SYS_gettid syscall.h HAVE_SYS_GETTID) #this only works if we force include syscall.h on the files that want to call gettid()
 check_function_exists(sched_setscheduler HAVE_SCHED_SETSCHEDULER)
 check_include_files(malloc.h HAVE_MALLOC_H)
 set(HAVE_ANDROID_OS False) # What's the impact of setting this to True?

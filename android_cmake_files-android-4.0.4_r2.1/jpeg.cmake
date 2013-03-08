@@ -15,15 +15,16 @@ set(LOCAL_SRC_FILES
     )
 
 # use ashmem as libjpeg decoder's backing store
-concat(LOCAL_CFLAGS -DUSE_ANDROID_ASHMEM)
-concat(LOCAL_SRC_FILES
-	jmem-ashmem.c
-    )
+# concat(LOCAL_CFLAGS -DUSE_ANDROID_ASHMEM)
+# concat(LOCAL_SRC_FILES
+# 	jmem-ashmem.c
+#     )
 
 # the original android memory manager.
 # use sdcard as libjpeg decoder's backing store
-#LOCAL_SRC_FILES += 
-#	jmem-android.c
+concat(LOCAL_SRC_FILES
+	jmem-android.c
+    )
 
 concat(LOCAL_CFLAGS -DAVOID_TABLES )
 concat(LOCAL_CFLAGS -O3 -fstrict-aliasing -fprefetch-loop-arrays)

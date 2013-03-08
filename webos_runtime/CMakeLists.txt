@@ -1,9 +1,32 @@
 set(LOCAL_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+
 CLEAR_VARS()
 
 set(LOCAL_C_INCLUDES
     ${JNI_H_INCLUDE}
     ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/frameworks/base/include
+    )
+
+set(LOCAL_SRC_FILES
+    webOSRuntime.cpp
+    )
+
+set(LOCAL_SHARED_LIBRARIES
+    )
+
+set(LOCAL_LDFLAGS -L/opt/PalmPDK/device/lib)
+
+set(LOCAL_MODULE webos_runtime)
+
+BUILD_SHARED_LIBRARY()
+
+CLEAR_VARS()
+
+set(LOCAL_C_INCLUDES
+    ${JNI_H_INCLUDE}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_SOURCE_DIR}/frameworks/base/include
     )
 
 set(LOCAL_SRC_FILES
@@ -13,9 +36,12 @@ set(LOCAL_SRC_FILES
 set(LOCAL_SHARED_LIBRARIES
 	cutils 
 	utils 
-	#binder 
-	#android_runtime
+	binder 
+    dvm
+    webos_runtime
     )
+
+concat(LOCAL_LDLIBS -lgcc_s)
 
 set(LOCAL_MODULE app_process)
 

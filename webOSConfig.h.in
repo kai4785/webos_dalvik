@@ -53,6 +53,11 @@
  * Do we have the futex syscall?
  */
 #cmakedefine HAVE_FUTEX
+#cmakedefine HAVE_SYS_FUTEX
+#if ! defined HAVE_FUTEX && defined HAVE_SYS_FUTEX
+#define futex() syscall(SYS_futex)
+#define HAVE_FUTEX
+#endif
 
 /*
  * Define if we already have the futex wrapper functions defined. Yes if
@@ -203,6 +208,11 @@
  * Defined if we have the gettid() system call.
  */
 #cmakedefine HAVE_GETTID
+#cmakedefine HAVE_SYS_GETTID
+#if ! defined HAVE_GETTID && defined HAVE_SYS_GETTID
+#define gettid() syscall(SYS_gettid)
+#define HAVE_GETTID
+#endif
 
 /* 
  * Defined if we have the sched_setscheduler() call

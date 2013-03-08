@@ -95,7 +95,7 @@ set(LOCAL_SRC_FILES
 	src/ports/SkFontHost_FreeType.cpp 
 	src/ports/SkFontHost_tables.cpp 
 	src/ports/SkGlobals_global.cpp 
-	src/ports/SkImageRef_ashmem.cpp #FIXME: Find a fix for errno missing
+	#src/ports/SkImageRef_ashmem.cpp #FIXME: Find a fix for errno missing
 	src/ports/SkOSFile_stdio.cpp 
 	src/ports/SkTime_Unix.cpp 
 	src/core/SkAlphaRuns.cpp 
@@ -267,7 +267,9 @@ if(${NO_FALLBACK_FONT})
 	concat(LOCAL_CFLAGS -DNO_FALLBACK_FONT)
 endif()
 
-concat(LOCAL_LDLIBS -lpthread)
+set(LOCAL_LDFLAGS -L/opt/PalmPDK/device/lib)
+
+concat(LOCAL_LDLIBS -lpthread -lfreetype)
 
 set(LOCAL_MODULE skia)
 

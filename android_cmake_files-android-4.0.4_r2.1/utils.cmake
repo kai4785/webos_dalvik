@@ -105,6 +105,7 @@ concat(LOCAL_C_INCLUDES
         )
 
 concat(LOCAL_LDLIBS -lpthread)
+#concat(LOCAL_LDLIBS -lgcc_s)
 
 set(LOCAL_SHARED_LIBRARIES
 	z 
@@ -114,7 +115,6 @@ set(LOCAL_SHARED_LIBRARIES
     )
 
 set(LOCAL_MODULE utils)
-concat(LOCAL_CFLAGS -DHAVE_OFF64_T)
 BUILD_SHARED_LIBRARY()
 
 # ifeq ($(TARGET_OS),linux)

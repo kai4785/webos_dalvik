@@ -7,18 +7,18 @@
 
 #define LOG_TAG "appproc"
 
-//#include <binder/IPCThreadState.h>
-//#include <binder/ProcessState.h>
-//#include <utils/Log.h>
+#include <binder/IPCThreadState.h>
+#include <binder/ProcessState.h>
+#include <utils/Log.h>
+#include <utils/StrongPointer.h>
 #include <cutils/process_name.h>
 #include <cutils/memory.h>
-#include <jni.h>
-//#include <android_runtime/AndroidRuntime.h>
 #include "webOSRuntime.h"
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
+
+using namespace android;
 
 namespace webos {
 
@@ -121,7 +121,7 @@ public:
 
 }
 
-using namespace android;
+using namespace webos;
 
 /*
  * sets argv0 to as much of newArgv0 as will fit

@@ -19,7 +19,7 @@ set(TARGET_GLOBAL_CFLAGS
     -march=armv7-a -mtune=cortex-a8 -mfpu=neon -ftree-vectorize -mfloat-abi=softfp
     -include webOSConfig.h
     -D_GNU_SOURCE
-    #-D_FILE_OFFSET_BITS=64
+    -D_FILE_OFFSET_BITS=64
 )
 #set(TARGET_GLOBAL_CFLAGS "-march=armv7-a -mfpu=vfp -mfloat-abi=softfp")
 add_definitions(${TARGET_GLOBAL_CFLAGS})
