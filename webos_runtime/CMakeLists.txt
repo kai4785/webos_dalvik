@@ -6,9 +6,14 @@ set(LOCAL_C_INCLUDES
     ${JNI_H_INCLUDE}
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/frameworks/base/include
+    ${libnativehelper_INCLUDE_DIR}/include
     )
 
 set(LOCAL_SRC_FILES
+    android_os_SystemProperties.cpp
+    android_util_Log.cpp
+    android_internal_os_ZygoteInit.cpp
+    android_net_LocalSocketImpl.cpp
     webOSRuntime.cpp
     )
 

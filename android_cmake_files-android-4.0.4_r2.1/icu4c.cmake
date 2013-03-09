@@ -19,3 +19,7 @@ android_add_subdirectory(common)
 android_add_subdirectory(i18n)
 #android_include(icu4c_stubdata.cmake)
 
+install(FILES stubdata/icudt46l-all.dat 
+    DESTINATION icu
+    RENAME icudt46l.dat
+    )

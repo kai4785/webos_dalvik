@@ -96,10 +96,13 @@ namespace webos {
  * JNI-based registration functions.  Note these are properly contained in
  * namespace android.
  */
+extern int register_android_os_SystemProperties(JNIEnv *env);
+extern int register_android_util_Log(JNIEnv* env);
+extern int register_com_android_internal_os_ZygoteInit(JNIEnv* env);
+extern int register_android_net_LocalSocketImpl(JNIEnv* env);
 /*
 extern int register_android_content_AssetManager(JNIEnv* env);
 extern int register_android_util_EventLog(JNIEnv* env);
-extern int register_android_util_Log(JNIEnv* env);
 extern int register_android_content_StringBlock(JNIEnv* env);
 extern int register_android_content_XmlBlock(JNIEnv* env);
 extern int register_android_emoji_EmojiFactory(JNIEnv* env);
@@ -139,13 +142,11 @@ extern int register_android_os_MessageQueue(JNIEnv* env);
 extern int register_android_os_ParcelFileDescriptor(JNIEnv *env);
 extern int register_android_os_Power(JNIEnv *env);
 extern int register_android_os_StatFs(JNIEnv *env);
-extern int register_android_os_SystemProperties(JNIEnv *env);
 extern int register_android_os_SystemClock(JNIEnv* env);
 extern int register_android_os_FileObserver(JNIEnv *env);
 extern int register_android_os_FileUtils(JNIEnv *env);
 extern int register_android_os_UEventObserver(JNIEnv* env);
 extern int register_android_os_MemoryFile(JNIEnv* env);
-extern int register_android_net_LocalSocketImpl(JNIEnv* env);
 extern int register_android_net_NetworkUtils(JNIEnv* env);
 extern int register_android_net_TrafficStats(JNIEnv* env);
 extern int register_android_net_wifi_WifiManager(JNIEnv* env);
@@ -162,7 +163,6 @@ extern int register_android_server_BluetoothA2dpService(JNIEnv* env);
 extern int register_android_server_NetworkManagementSocketTagger(JNIEnv* env);
 extern int register_android_server_Watchdog(JNIEnv* env);
 extern int register_android_ddm_DdmHandleNativeHeap(JNIEnv *env);
-extern int register_com_android_internal_os_ZygoteInit(JNIEnv* env);
 extern int register_android_backup_BackupDataInput(JNIEnv *env);
 extern int register_android_backup_BackupDataOutput(JNIEnv *env);
 extern int register_android_backup_FileBackupHelperBase(JNIEnv *env);
@@ -1084,12 +1084,15 @@ static void register_jam_procs(const RegJAMProc array[], size_t count)
 }
 
 static const RegJNIRec gRegJNI[] = {
+    REG_JNI(register_android_os_SystemProperties),
+    REG_JNI(register_android_util_Log),
+    REG_JNI(register_com_android_internal_os_ZygoteInit),
+    REG_JNI(register_android_net_LocalSocketImpl),
     /*
     REG_JNI(register_android_debug_JNITest),
     REG_JNI(register_com_android_internal_os_RuntimeInit),
     REG_JNI(register_android_os_SystemClock),
     REG_JNI(register_android_util_EventLog),
-    REG_JNI(register_android_util_Log),
     REG_JNI(register_android_util_FloatMath),
     REG_JNI(register_android_text_format_Time),
     REG_JNI(register_android_content_AssetManager),
@@ -1100,7 +1103,6 @@ static const RegJNIRec gRegJNI[] = {
     REG_JNI(register_android_text_AndroidBidi),
     REG_JNI(register_android_text_KeyCharacterMap),
     REG_JNI(register_android_os_Process),
-    REG_JNI(register_android_os_SystemProperties),
     REG_JNI(register_android_os_Binder),
     REG_JNI(register_android_view_Display),
     REG_JNI(register_android_nio_utils),
@@ -1160,14 +1162,12 @@ static const RegJNIRec gRegJNI[] = {
     REG_JNI(register_android_os_Power),
     REG_JNI(register_android_os_StatFs),
     REG_JNI(register_android_os_UEventObserver),
-    REG_JNI(register_android_net_LocalSocketImpl),
     REG_JNI(register_android_net_NetworkUtils),
     REG_JNI(register_android_net_TrafficStats),
     REG_JNI(register_android_net_wifi_WifiManager),
     REG_JNI(register_android_nfc_NdefMessage),
     REG_JNI(register_android_nfc_NdefRecord),
     REG_JNI(register_android_os_MemoryFile),
-    REG_JNI(register_com_android_internal_os_ZygoteInit),
     REG_JNI(register_android_hardware_Camera),
     REG_JNI(register_android_hardware_SensorManager),
     REG_JNI(register_android_hardware_UsbDevice),

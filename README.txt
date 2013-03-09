@@ -59,7 +59,9 @@ Now, cd here to shorten some of the copy-paste text, set a few environmental var
 # export ANDROID_ROOT=$PWD/com.kai.dalvikvm
 # export ANDROID_DATA=/media/internal
 # export LD_LIBRARY_PATH=com.kai.dalvikvm/lib
-# export BOOTCLASSPATH=$PWD/com.kai.dalvikvm/framework/core.jar:$PWD/com.kai.dalvikvm/framework/ext.jar:$PWD/com.kai.dalvikvm/framework/framework.jar
+# export FRAMEWORK=$PWD/com.kai.dalvikvm/framework
+# export BOOTCLASSPATH=$FRAMEWORK/core.jar:$FRAMEWORK/ext.jar:$FRAMEWORK/framework.jar:$FRAMEWORK/bouncycastle.jar
+
 # ./com.kai.dalvikvm/bin/dalvikvm -classpath /media/internal/android-jars/CmdLine.jar org.apache.HelloWorld
 
 The first time it runs, it will take a moment to create the dex cache files in /media/internal/dalvik-cache, so don't panic if it takes 3-5 seconds before it does anything.
@@ -80,5 +82,6 @@ This requires running app_process, which is the program that initializes all of 
 The bulk of that work is from the library 'android_runtime'. We need to decide how much of 'android_runtime' we use, and how much we just do ourselves. 
 This is where the *real* porting work is.
 
-In order to allow builds for dalvikvm to continue to work with out interruption, I've put all the app_process work inside an if(WORK_IN_PROGRESS) block in the main CMakeLists.txt. If you want to see how ap_process is progressing, you'll want to add "-DWORK_IN_PROGRESS=True" to your cmake line.
+In order to allow builds for dalvikvm to continue to work with out interruption, I've put all the app_process work inside an if(WEBOS_RUNTIME) block in the main CMakeLists.txt. If you want to see how ap_process is progressing, you'll want to add "-DWEBOS_RUNTIME=True" to your cmake line.
 
+# ./com.kai.dalvikvm/bin/app_process -verbose:class -Xzygote /system/bin --zygote --start-system-server
