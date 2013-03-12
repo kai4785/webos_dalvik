@@ -14,6 +14,7 @@
 #include <cutils/process_name.h>
 #include <cutils/memory.h>
 #include "webOSRuntime.h"
+#include "init_util.h"
 
 #include <stdio.h>
 #include <unistd.h>
@@ -187,6 +188,17 @@ int main(int argc, const char* const argv[])
     }
 
     runtime.mParentDir = parentDir;
+
+    {
+        int fd = create_socket("zygote", SOCK_STREAM, 666, 0, 0);
+        if(fd < 0)
+            return fd;
+        int size = snprintf(NULL, 0, "%d", fd) + 1;
+        char *ANDROID_SOCKET_zygote = (char *)alloca(size);
+        ANDROID_SOCKET_zygote[size] = '\0';
+        snprintf(ANDROID_SOCKET_zygote, size, "%d", fd);
+        setenv("ANDROID_SOCKET_zygote", ANDROID_SOCKET_zygote, 1);
+    }
 
     if (zygote) {
         runtime.start("com.android.internal.os.ZygoteInit",

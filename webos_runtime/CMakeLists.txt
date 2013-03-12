@@ -14,6 +14,8 @@ set(LOCAL_SRC_FILES
     android_util_Log.cpp
     android_internal_os_ZygoteInit.cpp
     android_net_LocalSocketImpl.cpp
+    android_os_SystemClock.cpp
+    android_util_EventLog.cpp
     webOSRuntime.cpp
     )
 
@@ -36,6 +38,7 @@ set(LOCAL_C_INCLUDES
 
 set(LOCAL_SRC_FILES
 	app_main.cpp
+    init_util.c
     )
 
 set(LOCAL_SHARED_LIBRARIES

@@ -27,7 +27,6 @@ if(NOT GIT_TAG)
 endif()
 option(GIT_CLEAN "Clean out changes to git submodules" On)
 
-set(submodules external/expat external/fdlibm external/icu4c external/openssl external/safe-iop external/zlib system/core libcore libnativehelper dalvik)
 #FIXME Figure out how to make this work. Probably custom target so we can set CWD
 foreach(module ${submodules})
     execute_process(COMMAND cd ${CMAKE_SOURCE_DIR} && git submodule foreach git clean -f -d)

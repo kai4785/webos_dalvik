@@ -100,9 +100,10 @@ extern int register_android_os_SystemProperties(JNIEnv *env);
 extern int register_android_util_Log(JNIEnv* env);
 extern int register_com_android_internal_os_ZygoteInit(JNIEnv* env);
 extern int register_android_net_LocalSocketImpl(JNIEnv* env);
+extern int register_android_os_SystemClock(JNIEnv* env);
+extern int register_android_util_EventLog(JNIEnv* env);
 /*
 extern int register_android_content_AssetManager(JNIEnv* env);
-extern int register_android_util_EventLog(JNIEnv* env);
 extern int register_android_content_StringBlock(JNIEnv* env);
 extern int register_android_content_XmlBlock(JNIEnv* env);
 extern int register_android_emoji_EmojiFactory(JNIEnv* env);
@@ -142,7 +143,6 @@ extern int register_android_os_MessageQueue(JNIEnv* env);
 extern int register_android_os_ParcelFileDescriptor(JNIEnv *env);
 extern int register_android_os_Power(JNIEnv *env);
 extern int register_android_os_StatFs(JNIEnv *env);
-extern int register_android_os_SystemClock(JNIEnv* env);
 extern int register_android_os_FileObserver(JNIEnv *env);
 extern int register_android_os_FileUtils(JNIEnv *env);
 extern int register_android_os_UEventObserver(JNIEnv* env);
@@ -1088,11 +1088,11 @@ static const RegJNIRec gRegJNI[] = {
     REG_JNI(register_android_util_Log),
     REG_JNI(register_com_android_internal_os_ZygoteInit),
     REG_JNI(register_android_net_LocalSocketImpl),
+    REG_JNI(register_android_os_SystemClock),
+    REG_JNI(register_android_util_EventLog),
     /*
     REG_JNI(register_android_debug_JNITest),
     REG_JNI(register_com_android_internal_os_RuntimeInit),
-    REG_JNI(register_android_os_SystemClock),
-    REG_JNI(register_android_util_EventLog),
     REG_JNI(register_android_util_FloatMath),
     REG_JNI(register_android_text_format_Time),
     REG_JNI(register_android_content_AssetManager),

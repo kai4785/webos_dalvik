@@ -33,12 +33,15 @@ $ make DESTDIR=. install
 At this point, your build directory should have a com.kai.dalvikvm directory with a 'bin' and 'lib' directory containing stuff.
 I don't have a way to build core.jar yet, so I steal it from an Android Source build. On my machine it's:
 <android source dir>/out/target/product/generic/dex_bootjars/system/framework/core.jar
-Copy this core.jar file into a new directory com.kai.dalvikvm/framework:
+Copy these jar files into a new directory com.kai.dalvikvm/framework:
 $ mkdir com.kai.dalvikvm/framework
-$ cp <android source dir>/out/target/product/generic/dex_bootjars/system/framework/core.jar com.kai.dalvikvm/framework
+$ cp <android source dir>/out/target/product/generic/dex_bootjars/system/framework/{core,ext,framework,bouncycastle}.jar com.kai.dalvikvm/framework
 
 Don't have one of your own? Here, have one of mine:
 $ wget -O com.kai.dalvikvm/framework/core.jar http://kai.gnukai.com/framework_4.0.4/core.jar
+$ wget -O com.kai.dalvikvm/framework/ext.jar http://kai.gnukai.com/framework_4.0.4/ext.jar
+$ wget -O com.kai.dalvikvm/framework/framework.jar http://kai.gnukai.com/framework_4.0.4/framework.jar
+$ wget -O com.kai.dalvikvm/framework/bouncycastle.jar http://kai.gnukai.com/framework_4.0.4/bouncycastle.jar
 
 Now we need the icu data file: (FIXME This should be done in CMake....)
 $ mkdir com.kai.dalvikvm/icu
@@ -82,6 +85,15 @@ This requires running app_process, which is the program that initializes all of 
 The bulk of that work is from the library 'android_runtime'. We need to decide how much of 'android_runtime' we use, and how much we just do ourselves. 
 This is where the *real* porting work is.
 
-In order to allow builds for dalvikvm to continue to work with out interruption, I've put all the app_process work inside an if(WEBOS_RUNTIME) block in the main CMakeLists.txt. If you want to see how ap_process is progressing, you'll want to add "-DWEBOS_RUNTIME=True" to your cmake line.
+In order to allow builds for dalvikvm to continue to work with out interruption, I've put all the app_process work inside an if(WEBOS_RUNTIME) block in the main CMakeLists.txt. If you want to see how ap_process is progressing, you'll want to add "-DWEBOS_RUNTIME=True" to your cmake line. The output on the TouchPad should look promising.
 
-# ./com.kai.dalvikvm/bin/app_process -verbose:class -Xzygote /system/bin --zygote --start-system-server
+# mkdir /var/socket
+# ./com.kai.dalvikvm/bin/app_process -Xzygote /system/bin --zygote --start-system-server
+Created socket '/var/socket/zygote' with mode '1232', user '0', group '0'
+I/SamplingProfilerIntegration( 8011): Profiling disabled.
+I/Zygote  ( 8011): Preloading classes...
+
+But what's it doing? And how do I kick it to do more?
+http://stackoverflow.com/questions/5494764/how-to-run-a-specific-android-app-using-terminal
+./frameworks/base/cmds/am/am
+Looks like a good place to start!
