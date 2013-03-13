@@ -97,3 +97,5 @@ But what's it doing? And how do I kick it to do more?
 http://stackoverflow.com/questions/5494764/how-to-run-a-specific-android-app-using-terminal
 ./frameworks/base/cmds/am/am
 Looks like a good place to start!
+# export CLASSPATH=$PWD/com.kai.dalvikvm/framework/am.jar
+# $ANDROID_ROOT/bin/app_process $ANDROID_ROOT com.android.commands.am.Am "$@"

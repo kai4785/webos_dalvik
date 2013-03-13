@@ -130,6 +130,43 @@ macro(BUILD_EXECUTABLE)
     )
 endmacro()
 
+macro(BUILD_HOST_JAVA_LIBRARY)
+    message(STATUS "Configuring Host Java Library ${LOCAL_MODULE}")
+    set(${LOCAL_MODULE}_jar ${CMAKE_CURRENT_BINARY_DIR}/${LOCAL_MODULE}.jar CACHE STRING "" FORCE)
+    add_custom_command(OUTPUT ${${LOCAL_MODULE}_jar}
+        COMMAND javac -s . -d . ${LOCAL_JAVACFLAGS} ${LOCAL_SRC_FILES}
+        COMMAND find . -name *.class | xargs jar cvfm ${LOCAL_MODULE}.jar ${LOCAL_JAR_MANIFEST}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        )
+    add_custom_target(${LOCAL_MODULE}
+        SOURCES ${LOCAL_SRC_FILES}
+        DEPENDS ${${LOCAL_MODULE}_jar}
+        )
+    install(FILES ${${LOCAL_MODULE}_jar}
+        DESTINATION framework
+        )
+endmacro()
+
+macro(BUILD_JAVA_LIBRARY)
+    message(STATUS "Configuring Java Library ${LOCAL_MODULE}")
+    message(STATUS "LOCAL_SRC_FILES: ${LOCAL_SRC_FILES}")
+    set(${LOCAL_MODULE}_jar ${CMAKE_CURRENT_BINARY_DIR}/${LOCAL_MODULE}.jar CACHE STRING "" FORCE)
+    add_custom_command(OUTPUT ${${LOCAL_MODULE}_jar}
+        COMMAND javac -s . -d . ${LOCAL_JAVACFLAGS} ${LOCAL_SRC_FILES}
+        COMMAND find . -name *.class | xargs java -jar ${dx_jar} --dex ${LOCAL_DX_FLAGS} --output=${LOCAL_MODULE}.jar ${LOCAL_JAR_MANIFEST}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        )
+    add_custom_target(${LOCAL_MODULE}
+        SOURCES ${LOCAL_SRC_FILES}
+        DEPENDS ${dx_jar}
+        DEPENDS ${${LOCAL_MODULE}_jar}
+        )
+    add_dependencies(${LOCAL_MODULE} dx)
+    install(FILES ${${LOCAL_MODULE}_jar}
+        DESTINATION framework
+        )
+endmacro()
+
 macro(CLEAR_VARS)
     unset(LOCAL_MODULE)
     #GCC normally runs from the source dir in the Android project, but not so
