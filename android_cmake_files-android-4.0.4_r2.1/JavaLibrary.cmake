@@ -37,28 +37,34 @@
 #
 # All subdirectories are optional (hence the "2> /dev/null"s below).
 
-macro(all_main_java_files_under out dirs)
-    foreach(dir ${dirs})
+macro(all_main_java_files_under out)
+    foreach(dir ${ARGN})
+    message("Searching through ${dir}")
         file(GLOB_RECURSE output ${LOCAL_PATH}/${dir}/src/main/java/*.java)
+        #message("Adding ${output}")
         concat(${out} ${output})
     endforeach()
 endmacro()
 
-macro(all_test_java_files_under out dirs)
-    foreach(dir ${dirs})
+macro(all_test_java_files_under out)
+    foreach(dir ${ARGN})
         file(GLOB_RECURSE output ${LOCAL_PATH}/${dir}/src/test/java/*.java)
         concat(${out} ${output})
     endforeach()
 endmacro()
 
-macro(all_core_resource_dirs out dirs)
-# Dunno yet
+macro(all_core_resource_dirs out)
+    foreach(dir ${ARGN})
     #$(shell cd $(LOCAL_PATH) && ls -d */src/${dir})/{java,resources} 2> /dev/null)
+        file(GLOB output ${LOCAL_PATH}/*/src/${dir}/java)
+        concat(${out} ${output})
+        file(GLOB output ${LOCAL_PATH}/*/src/${dir}/resources)
+        concat(${out} ${output})
+    endforeach()
 endmacro()
 
 # The Java files and their associated resources.
 all_main_java_files_under(core_src_files dalvik dom json luni support xml)
-#all_main_java_files_under(core_src_files dom json luni support xml)
 all_core_resource_dirs(core_resource_dirs main)
 all_core_resource_dirs(test_resource_dirs test)
 
@@ -91,7 +97,7 @@ set(LOCAL_NO_EMMA_COMPILE true)
 set(LOCAL_MODULE_TAGS optional)
 set(LOCAL_MODULE core)
 
-#BUILD_JAVA_LIBRARY()
+BUILD_JAVA_LIBRARY()
 
 # core-intermediates := ${intermediates}
 # 

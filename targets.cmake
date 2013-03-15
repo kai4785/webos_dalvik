@@ -149,10 +149,25 @@ endmacro()
 
 macro(BUILD_JAVA_LIBRARY)
     message(STATUS "Configuring Java Library ${LOCAL_MODULE}")
-    message(STATUS "LOCAL_SRC_FILES: ${LOCAL_SRC_FILES}")
     set(${LOCAL_MODULE}_jar ${CMAKE_CURRENT_BINARY_DIR}/${LOCAL_MODULE}.jar CACHE STRING "" FORCE)
+    string(REGEX REPLACE ";" " " LOCAL_SRC_TEXT "${LOCAL_SRC_FILES}")
+    set(LOCAL_SRC_LIST_FILE ${CMAKE_CURRENT_BINARY_DIR}/${LOCAL_MODULE}_list.txt)
+    message(${LOCAL_SRC_LIST_FILE})
+    file(WRITE ${LOCAL_SRC_LIST_FILE} ${LOCAL_SRC_TEXT})
+    message("LOCAL_JAVA_RESOURCE_DIRS: ${LOCAL_JAVA_RESOURCE_DIRS}")
+    # TODO: Implement this for LOCAL_JAVA_RESOURCE_DIRS
+    # find . \
+    #     -type d -a -name ".svn" -prune -o \
+    #     -type f \
+    #     -a \! -name "*.java" \
+    #     -a \! -name "package.html" \
+    #     -a \! -name "overview.html" \
+    #     -a \! -name ".*.swp" \
+    #     -a \! -name ".DS_Store" \
+    #     -a \! -name "*~" \
+    #     -print
     add_custom_command(OUTPUT ${${LOCAL_MODULE}_jar}
-        COMMAND javac -s . -d . ${LOCAL_JAVACFLAGS} ${LOCAL_SRC_FILES}
+        COMMAND javac -s . -d . ${LOCAL_JAVACFLAGS} @${LOCAL_SRC_LIST_FILE}
         COMMAND find . -name *.class | xargs java -jar ${dx_jar} --dex ${LOCAL_DX_FLAGS} --output=${LOCAL_MODULE}.jar ${LOCAL_JAR_MANIFEST}
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         )
